@@ -1,4 +1,4 @@
-import * as productsController from './productsController';
+import productsController from './productsController';
 
 // Constants
 const ADD_TO_SHOPPING_CART = "ADD_TO_SHOPPING_CART";
@@ -27,15 +27,16 @@ export default function reducer(state=initialState, action) {
         case REMOVE_FROM_SHOPPING_CART:
             let newArray = state.shoppingCart.slice();
             newArray.splice(action.index, 1);
-            return Object.assign({}, {shoppingCart: newArray});
+            return Object.assign({}, state, {shoppingCart: newArray});
             
-        defualt:
+        default:
             return state;
     }
 }
 
 // Action Creators
 export function addToShoppingCart(product) {
+    console.log(product)
     return {
         type: ADD_TO_SHOPPING_CART,
         payload: product
@@ -52,6 +53,6 @@ export function removeFromShoppingCart(productIndex) {
 export function getAllProducts(products) {
     return {
         type: GET_ALL_PRODUCTS,
-        payload: productsController.getAllProducts()
+        payload: productsController()
     }
 }
